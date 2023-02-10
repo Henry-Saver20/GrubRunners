@@ -38,9 +38,30 @@ public class playerMovement : MonoBehaviour
         float ix = Input.GetAxis("Horizontal");
         float iy = Input.GetAxis("Vertical");
         Vector2 move = new Vector2(0, 0);
-        if (Input.GetKey(KeyCode.UpArrow))
+
+        var horiz = Input.GetAxisRaw("Horizontal");
+        var vert = Input.GetAxisRaw("Vertical");
+        rb.velocity = new Vector2(horiz, vert) * moveSpeed;
+        /*if (Input.GetKey(KeyCode.W))
         {
-            /*move = new Vector2(0, 1 * moveSpeed);*/
+            rb.velocity = (transform.up * moveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.velocity = (-transform.right * moveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.velocity = (transform.right  * moveSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            rb.velocity = (-transform.up  * moveSpeed * Time.deltaTime);
+        }*/
+        //Zero Grav controls - OLD version movement
+        /*if (Input.GetKey(KeyCode.UpArrow))
+        {
+            /*move = new Vector2(0, 1 * moveSpeed);#1#
             Vector2 newDir = transform.up;
             rb.velocity += newDir * moveSpeed * Time.deltaTime;
 
@@ -54,7 +75,7 @@ public class playerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             rb.angularVelocity += -1 * rotationSpeed;
-        }
+        }*/
         //Rotation Controller
         if (Input.GetKey(KeyCode.Space))
         {
