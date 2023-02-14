@@ -87,10 +87,16 @@ public class playerMovement : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D col)
     {
         
-        if (col.gameObject.CompareTag("Wall"))
+        if (col.gameObject.tag == "Wall")
         {
             Debug.Log("BONK");
             rb.AddForce((transform.position - col.transform.position).normalized * 0.25f, ForceMode2D.Impulse);
+        }
+
+        if (col.gameObject.tag == "Enemy")
+        {
+            Debug.Log("ENEMY HIT");
+            rb.AddForce(new Vector2(2000f,2000f));
         }
         
     }
