@@ -16,71 +16,58 @@ public class playerMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
     public float rotationSpeed = 3f;
+
+    public bool isAlive;
+
+    [SerializeField] public GameObject attackObj;
     // Start is called before the first frame update
     void Start()
     {
+        isAlive = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, 50f);
-        if (rb.angularVelocity > 40f)
+        if (isAlive)
         {
-            rb.angularVelocity = 40f;
-        }
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, 50f);
+            if (rb.angularVelocity > 40f)
+            {
+                rb.angularVelocity = 40f;
+            }
 
-        if (rb.angularVelocity < -40f)
-        {
-            rb.angularVelocity = -40f;
-        }
-        //Movement Controller
-        float ix = Input.GetAxis("Horizontal");
-        float iy = Input.GetAxis("Vertical");
-        Vector2 move = new Vector2(0, 0);
+            if (rb.angularVelocity < -40f)
+            {
+                rb.angularVelocity = -40f;
+            }
 
-        var horiz = Input.GetAxisRaw("Horizontal");
-        var vert = Input.GetAxisRaw("Vertical");
-        rb.velocity = new Vector2(horiz, vert) * moveSpeed;
-        /*if (Input.GetKey(KeyCode.W))
-        {
-            rb.velocity = (transform.up * moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.velocity = (-transform.right * moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = (transform.right  * moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.velocity = (-transform.up  * moveSpeed * Time.deltaTime);
-        }*/
-        //Zero Grav controls - OLD version movement
-        /*if (Input.GetKey(KeyCode.UpArrow))
-        {
-            /*move = new Vector2(0, 1 * moveSpeed);#1#
-            Vector2 newDir = transform.up;
-            rb.velocity += newDir * moveSpeed * Time.deltaTime;
+            //Movement Controller
+            float ix = Input.GetAxis("Horizontal");
+            float iy = Input.GetAxis("Vertical");
+            Vector2 move = new Vector2(0, 0);
 
+            var horiz = Input.GetAxisRaw("Horizontal");
+            var vert = Input.GetAxisRaw("Vertical");
+            if (isAlive)
+            {
+                rb.velocity = new Vector2(horiz, vert) * moveSpeed;
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    
+                    Vector2 shotPosition = new Vector2(rb.position.x, rb.position.y + 2);
+                    float atkVelocity = attackObj.GetComponent<attackObject>().exitVelocity;
+                    GameObject atk = Instantiate(attackObj,shotPosition, transform.rotation);
+                    atk.GetComponent<attackObject>().projectile.velocity = new Vector2(atkVelocity, atkVelocity);
+                }
+            }
 
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            rb.angularVelocity += rotationSpeed;
-        }
-
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rb.angularVelocity += -1 * rotationSpeed;
-        }*/
-        //Rotation Controller
-        if (Input.GetKey(KeyCode.Space))
-        {
-            rb.velocity = rb.velocity / brakingSpeed;
-            rb.angularVelocity = rb.angularVelocity / brakingSpeed;
+            //Rotation Controller
+            if (Input.GetKey(KeyCode.Space))
+            {
+                rb.velocity = rb.velocity / brakingSpeed;
+                rb.angularVelocity = rb.angularVelocity / brakingSpeed;
+            }
         }
     }
 
@@ -96,7 +83,7 @@ public class playerMovement : MonoBehaviour
         if (col.gameObject.tag == "Enemy")
         {
             Debug.Log("ENEMY HIT");
-            rb.AddForce(new Vector2(2000f,2000f));
+            rb.AddForce(new Vector2(-col.transform.position.x * 20f,-col.transform.position.y * 20f));
         }
         
     }

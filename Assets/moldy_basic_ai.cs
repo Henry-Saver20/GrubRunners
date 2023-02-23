@@ -10,6 +10,8 @@ public class moldy_basic_ai : MonoBehaviour
 
     private bool foundPlayer = false;
 
+    [SerializeField] public float health = 10f;
+    public float maxHealth;
     private GameObject trackedPlayer;
     [SerializeField] public float moveSpeed = 5f;
 
@@ -28,6 +30,12 @@ public class moldy_basic_ai : MonoBehaviour
             Vector2 trackPos = trackedPlayer.GetComponent<Rigidbody2D>().position;
             _rb.position = Vector2.MoveTowards(transform.position, trackPos, moveSpeed * Time.deltaTime);
         }
+
+        if (health <= 0)
+        {
+            Debug.Log("Enemy killed");
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -36,6 +44,15 @@ public class moldy_basic_ai : MonoBehaviour
         {
             foundPlayer = true;
             trackedPlayer = col.gameObject;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "PlayerAttack")
+        {
+            /*col.gameObject.GetComponent<>()*/
+            health = health - 10;
         }
     }
 }
