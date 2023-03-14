@@ -14,6 +14,7 @@ public class moldy_basic_ai : MonoBehaviour
     public float maxHealth;
     private GameObject trackedPlayer;
     [SerializeField] public float moveSpeed = 5f;
+    [SerializeField] public GameObject entity;
 
     [SerializeField] private Rigidbody2D _rb;
     // Start is called before the first frame update
@@ -34,7 +35,7 @@ public class moldy_basic_ai : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("Enemy killed");
-            Destroy(gameObject);
+            Destroy(entity);
         }
     }
 

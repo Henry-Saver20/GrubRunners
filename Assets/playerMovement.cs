@@ -18,12 +18,18 @@ public class playerMovement : MonoBehaviour
     public float rotationSpeed = 3f;
 
     public bool isAlive;
-
+    public float fireRate = 5f;
     [SerializeField] public GameObject attackObj;
+
+    private player_gamecontroller playerController;
+
+
+    private float timeToFire;
     // Start is called before the first frame update
     void Start()
     {
         isAlive = true;
+        playerController = this.GetComponent<player_gamecontroller>();
     }
 
     // Update is called once per frame
@@ -52,9 +58,9 @@ public class playerMovement : MonoBehaviour
             if (isAlive)
             {
                 rb.velocity = new Vector2(horiz, vert) * moveSpeed;
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKey(KeyCode.Space) && timeToFire < Time.time)
                 {
-                    
+                    timeToFire = Time.time + fireRate;
                     Vector2 shotPosition = new Vector2(rb.position.x, rb.position.y + 2);
                     float atkVelocity = attackObj.GetComponent<attackObject>().exitVelocity;
                     GameObject atk = Instantiate(attackObj,shotPosition, transform.rotation);
@@ -84,6 +90,7 @@ public class playerMovement : MonoBehaviour
         {
             Debug.Log("ENEMY HIT");
             rb.AddForce(new Vector2(-col.transform.position.x * 20f,-col.transform.position.y * 20f));
+            playerController.DamagePlayer(10);
         }
         
     }

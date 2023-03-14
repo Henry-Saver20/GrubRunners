@@ -14,18 +14,20 @@ public class player_gamecontroller : MonoBehaviour
     private Rigidbody2D _rb;
     public bool isAlive;
     public float xpNeeded;
-
+    public GameObject uiController;
+    private UI_Controller _controller;
     void Start()
     {
         _rb = player.GetComponent<Rigidbody2D>();
         isAlive = true;
         xpNeeded = 100 + (level * 100);
+        _controller = uiController.GetComponent<UI_Controller>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void HealPlayer(float healingAmount)
@@ -39,6 +41,8 @@ public class player_gamecontroller : MonoBehaviour
         {
             health = newHealth;
         }
+
+        _controller.UpdateHealth(health, maxHealth);
     }
 
     public void DamagePlayer(float damageAmount)
@@ -49,6 +53,7 @@ public class player_gamecontroller : MonoBehaviour
             isAlive = false;
             player.GetComponent<playerMovement>().isAlive = false;
         }
+        _controller.UpdateHealth(health, maxHealth);
     }
 
     public void AddExp(float xpAmount)
