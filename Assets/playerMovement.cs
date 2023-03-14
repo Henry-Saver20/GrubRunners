@@ -61,19 +61,15 @@ public class playerMovement : MonoBehaviour
                 if (Input.GetKey(KeyCode.Space) && timeToFire < Time.time)
                 {
                     timeToFire = Time.time + fireRate;
-                    Vector2 shotPosition = new Vector2(rb.position.x, rb.position.y + 2);
+                    Vector2 shotPosition = new Vector2(rb.position.x, rb.position.y + 1f);
                     float atkVelocity = attackObj.GetComponent<attackObject>().exitVelocity;
-                    GameObject atk = Instantiate(attackObj,shotPosition, transform.rotation);
-                    atk.GetComponent<attackObject>().projectile.velocity = new Vector2(atkVelocity, atkVelocity);
+                    GameObject atk = Instantiate(attackObj,shotPosition, Quaternion.identity);
+                    atk.GetComponent<attackObject>().projectile.velocity = new Vector2(0f,atkVelocity);
                 }
             }
 
             //Rotation Controller
-            if (Input.GetKey(KeyCode.Space))
-            {
-                rb.velocity = rb.velocity / brakingSpeed;
-                rb.angularVelocity = rb.angularVelocity / brakingSpeed;
-            }
+
         }
     }
 
