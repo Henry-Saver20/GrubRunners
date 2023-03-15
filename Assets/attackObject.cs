@@ -14,7 +14,7 @@ public class attackObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(this.gameObject, timeToDespawn);
+        /*Destroy(this.gameObject, timeToDespawn);*/
     }
 
     // Update is called once per frame
@@ -25,5 +25,8 @@ public class attackObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log("Collision with: " + col.gameObject.name);
+        /*Destroy(this.gameObject,1);*/
     }
+    
 }

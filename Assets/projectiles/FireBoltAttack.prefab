@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4849095024290247185}
-  - component: {fileID: 4849095024290247186}
-  - component: {fileID: 7481297925101468252}
   m_Layer: 0
   m_Name: FireBoltAttack
   m_TagString: PlayerAttack
@@ -34,37 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4849095024290247186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4849095024290247187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f31f0438c5aaa684b925705fbf161cd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  exitVelocity: 10
-  projectile: {fileID: 4849095025671075271}
-  timeToDespawn: 1
---- !u!70 &7481297925101468252
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4849095024290247187}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
 --- !u!1 &4849095025671075266
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +43,8 @@ GameObject:
   - component: {fileID: 4849095025671075265}
   - component: {fileID: 4849095025671075264}
   - component: {fileID: 4849095025671075271}
-  - component: {fileID: 4705256991561621530}
+  - component: {fileID: 5610411969648077740}
+  - component: {fileID: 1449425090415314361}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: PlayerAttack
@@ -172,7 +140,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &4705256991561621530
+--- !u!70 &5610411969648077740
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,6 +153,21 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.12308502}
-  m_Size: {x: 1, y: 2.24617}
+  m_Offset: {x: 0, y: 0.13689804}
+  m_Size: {x: 1, y: 2.273796}
   m_Direction: 0
+--- !u!114 &1449425090415314361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4849095025671075266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31f0438c5aaa684b925705fbf161cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitVelocity: 10
+  projectile: {fileID: 4849095025671075271}
+  timeToDespawn: 1

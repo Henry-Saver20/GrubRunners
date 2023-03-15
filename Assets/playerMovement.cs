@@ -53,17 +53,35 @@ public class playerMovement : MonoBehaviour
             float iy = Input.GetAxis("Vertical");
             Vector2 move = new Vector2(0, 0);
 
-            var horiz = Input.GetAxisRaw("Horizontal");
-            var vert = Input.GetAxisRaw("Vertical");
+            var horiz = 0;
+            var vert = 0;
+            if (Input.GetKey(KeyCode.W))
+            {
+                vert += 2;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                vert -= 2;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                horiz -= 2;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                horiz += 2;
+            }
+            
             if (isAlive)
             {
+                /*Debug.Log(new Vector2(horiz, vert) * moveSpeed);*/
                 rb.velocity = new Vector2(horiz, vert) * moveSpeed;
                 if (Input.GetKey(KeyCode.Space) && timeToFire < Time.time)
                 {
                     timeToFire = Time.time + fireRate;
-                    Vector2 shotPosition = new Vector2(rb.position.x, rb.position.y + 1f);
+                    Vector2 shotPosition = new Vector2(rb.position.x, rb.position.y + 1.5f);
                     float atkVelocity = attackObj.GetComponent<attackObject>().exitVelocity;
-                    GameObject atk = Instantiate(attackObj,shotPosition, Quaternion.identity);
+                    GameObject atk = Instantiate(attackObj,shotPosition, Quaternion.LookRotation(Vector3.forward));
                     atk.GetComponent<attackObject>().projectile.velocity = new Vector2(0f,atkVelocity);
                 }
             }
